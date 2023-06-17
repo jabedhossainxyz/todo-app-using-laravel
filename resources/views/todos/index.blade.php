@@ -2,17 +2,28 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+        <div class="row justify-content-center">
+                <div class="col-md-8">
+                        <div class="card">
+                                <div class="card-header">{{ __('Dashboard') }}</div>
 
-                <div class="card-body">
+                                <div class="card-body">
 
-                    todos index page
+                                        <table class="table">
+                                                <thead>
+                                                        <tr>
+                                                                <th scope="col">Title</th>
+                                                                <th scope="col">Description</th>
+                                                                <th scope="col">Complted</th>
+                                                                <th scope="col">Actions</th>
+                                                        </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                        </table>
+                                </div>
+                        </div>
                 </div>
-            </div>
         </div>
-    </div>
 </div>
 @endsection
