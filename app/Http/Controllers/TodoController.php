@@ -15,6 +15,12 @@ class TodoController extends Controller
         return view('todos.create');
     } 
     public function store(TodoRequest $request){
-        Todos::create($request->all());
+        Todos::create([
+            'title' => $request->title,
+            'description'=> $request->description,
+            'completed'=>0
+        ]);
+        $request->session()->flash('alert-success', 'Todo Created Successfully');
+        return to_route('todos.index');
     }
 }
