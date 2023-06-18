@@ -30,6 +30,33 @@ class TodoController extends Controller
     }
 
     public function show($id){
+
+        $todo = Todos::find($id);
+    
+        if (! $todo) {
+            request()->session()->flash('error', 'Unable to locate the Todo');
+            return redirect()->route('todos.index')->withErrors([
+                'error' => 'Unable to locate the Todo'
+            ]);
+        }
+    
+        return view('todos.show', ['todo' => $todo]);
+    }
+
+    public function edit($id){
+        $todo = Todos::find($id);
+        if (! $todo) {
+            request()->session()->flash('error', 'Unable to locate the Todo');
+            return redirect()->route('todos.index')->withErrors([
+                'error' => 'Unable to locate the Todo'
+            ]);
+        }
+    
+        return view('todos.edit', ['todo' => $todo]);
+    }
+
+    public function update(Request $request, $id)
+{
     $todo = Todos::find($id);
 
     if (!$todo) {
@@ -38,8 +65,11 @@ class TodoController extends Controller
         ]);
     }
 
-    return view('todos.show', ['todo' => $todo]);
+    $todo->title = $request->title;
+    $todo->description = $request->description;
+    $todo->save();
+
+    return redirect()->route('todos.index')->with('alert-success', 'Todo Updated Successfully');
 }
 
-    
 }
