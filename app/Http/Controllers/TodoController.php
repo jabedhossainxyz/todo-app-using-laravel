@@ -9,7 +9,10 @@ use Illuminate\Http\Request;
 class TodoController extends Controller
 {
     public function index(){
-        return view('todos.index');
+        $todos = Todos::all();
+        return view('todos.index', [
+            'todos' => $todos
+        ]);
     }
     public function create(){
         return view('todos.create');
@@ -20,7 +23,7 @@ class TodoController extends Controller
             'description'=> $request->description,
             'completed'=>0
         ]);
-        
+
         $request->session()->flash('alert-success', 'Todo Created Successfully');
         return to_route('todos.index');
     }
