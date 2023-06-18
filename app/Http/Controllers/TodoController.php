@@ -20,6 +20,7 @@ class TodoController extends Controller
             'description'=> $request->description,
             'completed'=>0
         ]);
+        
         $request->session()->flash('alert-success', 'Todo Created Successfully');
         return to_route('todos.index');
     }
