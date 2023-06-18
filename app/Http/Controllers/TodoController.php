@@ -25,6 +25,21 @@ class TodoController extends Controller
         ]);
 
         $request->session()->flash('alert-success', 'Todo Created Successfully');
-        return to_route('todos.index');
+        return redirect()->route('todos.index');
+
     }
+
+    public function show($id){
+    $todo = Todos::find($id);
+
+    if (!$todo) {
+        return redirect()->route('todos.index')->withErrors([
+            'error' => 'Unable to locate the Todo'
+        ]);
+    }
+
+    return view('todos.show', ['todo' => $todo]);
+}
+
+    
 }
