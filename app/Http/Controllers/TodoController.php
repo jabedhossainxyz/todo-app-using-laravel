@@ -77,18 +77,14 @@ class TodoController extends Controller
     }
     public function destroy($id)
     {
-        // Find the todo by id
         $todo = Todos::find($id);
 
         if (!$todo) {
-            // Handle if the todo is not found
             abort(404);
         }
 
-        // Delete the todo
         $todo->delete();
 
-        // Redirect back with a success message
         return redirect()->route('todos.index')->with('alert-success', 'Todo deleted successfully');
     }
 }
