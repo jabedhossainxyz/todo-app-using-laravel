@@ -64,9 +64,14 @@
                                                     href=" {{ route('todos.edit', $todo->id) }} ">Edit</a>
                                                 <a class="inner btn btn-sm btn-success"
                                                     href=" {{ route('todos.show', $todo->id) }} ">View</a>
-                                                    
-                                                <button class="btn btn-sm btn-danger">Delete</button>
 
+                                                <form action="{{ route('todos.destroy', $todo->id) }}" method="POST"
+                                                    class="inner">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                                </form>
+                                                
                                             </td>
                                         </tr>
                                     @endforeach
